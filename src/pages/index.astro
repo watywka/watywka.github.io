@@ -1,14 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+const allArticles = await Astro.glob("../pages/articles/*.md");
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Tech articles">
 	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
+		<h1>Welcome to <span class="text-gradient">watywka</span>'s tech blog</h1>
 		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
+			Personal projects, anything tech related. Web design, architecture, Java, highload.
 		</p>
 		<ul role="list" class="link-card-grid">
 			<Card
@@ -16,6 +16,15 @@ import Card from '../components/Card.astro';
 				title="About"
 				body="There is nothing there yet."
 			/>
+			{
+				allArticles.map((article) => (
+					<Card
+						href={article.url}
+						title={article.frontmatter.title}
+						body={article.frontmatter.description}
+					/>
+				))
+			}
 		</ul>
 	</main>
 </Layout>
@@ -24,7 +33,7 @@ import Card from '../components/Card.astro';
 	main {
 		margin: auto;
 		padding: 1.5rem;
-		max-width: 60ch;
+		max-width: 100ch;
 	}
 	h1 {
 		font-size: 3rem;
